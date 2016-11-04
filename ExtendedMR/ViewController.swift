@@ -13,66 +13,45 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     let states = ["Alaska", "Alabama", "California", "Main", "New York", "Texas"]
     
     // Outlets
-    
-    @IBOutlet weak var miraclePill: UIImageView!
-    @IBOutlet weak var miracleLabel: UILabel!
-    @IBOutlet weak var miraclePrice: UILabel!
-    @IBOutlet weak var diviserView: UIView!
-    @IBOutlet weak var fullNameLabel: UILabel!
-    @IBOutlet weak var fullNameTextField: UITextField!
-    @IBOutlet weak var streetLabel: UILabel!
-    @IBOutlet weak var streetTextField: UITextField!
-    @IBOutlet weak var cityLabel: UILabel!
-    @IBOutlet weak var cityTextField: UITextField!
-    
-    @IBOutlet weak var pickStateBtn: UIButton!
-    
     // Picker
+    
+    @IBOutlet weak var statePickerBTN: UIButton!
+    
     @IBOutlet weak var stateSelection: UIPickerView!
 
     // Success image
     
     @IBOutlet weak var successImg: UIImageView!
-    @IBOutlet weak var countryLabel:UILabel!
-    @IBOutlet weak var countryTextField: UITextField!
-    @IBOutlet weak var zipLabel: UILabel!
-    @IBOutlet weak var zipTextField: UITextField!
     @IBOutlet weak var buyNowBTN: UIButton!
     // Actions
 
     @IBAction func buyNowBTNPressed(_ sender: AnyObject) {
         
-        miraclePill.isHidden = true
-        miracleLabel.isHidden = true
-        miraclePrice.isHidden = true
-        diviserView.isHidden = true
-        fullNameLabel.isHidden = true
-        fullNameTextField.isHidden = true
-        streetLabel.isHidden = true
-        streetTextField.isHidden = true
-        cityLabel.isHidden = true
-        cityTextField.isHidden = true
-        pickStateBtn.isHidden = true
-        countryLabel.isHidden = true
-        countryTextField.isHidden = true
-        zipLabel.isHidden = true
-        zipTextField.isHidden = true
-        buyNowBTN.isHidden = true
-        
         // Show successImage
         
         successImg.isHidden = false
         stateSelection.isHidden = true
+        
+        // Hid the rest
+        
+        for i in 1...14 {
+            
+            view.viewWithTag(i)?.isHidden = true
+        }
+        
+        statePickerBTN.isHidden = true
+        buyNowBTN.isHidden = true
     }
     
     @IBAction func pickStatePressed(_ sender: AnyObject) {
         
-        countryLabel.isHidden = true
-        countryTextField.isHidden = true
-        zipLabel.isHidden = true
-        zipTextField.isHidden = true
         
         stateSelection.isHidden = false
+        
+        for i in 11...14 {
+            
+            view.viewWithTag(i)?.isHidden = true
+        }
         
         
     }
@@ -104,14 +83,17 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
-        pickStateBtn.setTitle(states[row], for: .normal)
+        // Hid Again Picker
         stateSelection.isHidden = true
         
         // Show Country and Zip Code
         
-        countryLabel.isHidden = false
-        countryTextField.isHidden = false
-        zipLabel.isHidden = false
-        zipTextField.isHidden = false
+        for i in 11...14 {
+            
+            view.viewWithTag(i)?.isHidden = false
+        }
+        
+        //Change the title of the button to the corresponding picker
+        statePickerBTN.setTitle(states[row], for: .normal)
     }
 }
